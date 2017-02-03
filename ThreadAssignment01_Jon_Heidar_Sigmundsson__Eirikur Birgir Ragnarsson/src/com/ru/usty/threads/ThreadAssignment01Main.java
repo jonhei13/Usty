@@ -10,12 +10,33 @@ public class ThreadAssignment01Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         System.out.println("Processors: " + Runtime.getRuntime().availableProcessors());
         System.out.println("Solutions:");
-        long startTime = System.currentTimeMillis();
 
+
+
+    //=============== Number 1 =================
+
+        Thread[] threads = new Thread[NUMBER_OF_PROBLEMS];
+        long startTime = System.currentTimeMillis();
+/*
+        for (int i = 0; i < NUMBER_OF_PROBLEMS; i++){
+            threads[i] = new Thread(new ThreadRunnable());
+        }
+
+        for (Thread thread : threads){
+            thread.start();
+            thread.join();
+        }
+        System.out.println("Number 1 All done");
+        System.out.println("All done");
+
+        System.out.println("Total time: " + (System.currentTimeMillis() - startTime) + " ms");
+*/
+    //=============== Number 3 =================
+
+        startTime = System.currentTimeMillis();
         ArrayList<Future<Runnable>> Fute = new ArrayList<>();
 
-
-        ExecutorService Serv = Executors.newFixedThreadPool(NUMBER_OF_PROBLEMS);
+        ExecutorService Serv = Executors.newFixedThreadPool(6);
 
         for (int i = 0; i < NUMBER_OF_PROBLEMS; i++){
             Future New = Serv.submit(new ThreadRunnable());
@@ -27,8 +48,11 @@ public class ThreadAssignment01Main {
         }
         Serv.shutdown();
 
+        System.out.println("Number 3 All done");
         System.out.println("All done");
 
         System.out.println("Total time: " + (System.currentTimeMillis() - startTime) + " ms");
+
     }
+
 }
